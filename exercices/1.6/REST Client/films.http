@@ -1,0 +1,45 @@
+### Read all films
+GET http://localhost:3000/films?minimum-duration=0
+
+### Read a film
+GET http://localhost:3000/films/1
+
+### Create a film
+POST http://localhost:3000/films
+
+### Read all films filtered by minimum duration
+GET http://localhost:3000/films?minimum-duration=120
+
+### Create a film that already exists
+POST http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title": "her",
+    "director": "Spike Jonze",
+    "duration": 126
+}
+
+### Delete a film
+DELETE http://localhost:3000/films/1
+
+### Update a film
+PATCH http://localhost:3000/films/2
+Content-Type: application/json
+
+{
+    "title": "Her",
+    "director": "Spike Jonze",
+    "duration": 126
+}
+
+### Update or create a film
+PUT http://localhost:3000/films/2
+Content-Type: application/json
+
+{
+    "title": "Him",
+    "director": "Spike Jonze",
+    "duration": 126
+}
+
