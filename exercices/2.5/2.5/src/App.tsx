@@ -20,6 +20,7 @@ function App() {
       <ClickCounter
         title="Amazing counter"
         on10Click="You are a master in the art of clicking !"
+        onHover="Please click on me !"
       />
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
