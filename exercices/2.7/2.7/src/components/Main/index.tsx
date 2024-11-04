@@ -2,7 +2,7 @@ import { useState, SyntheticEvent } from "react";
 import { Movie } from "../../types";
 import MovieList from "./movieList";
 
-const defaultMovies = [
+const defaultMovies:Movie[] = [
     {
         id: 1,
         title: "The Godfather",
@@ -43,17 +43,19 @@ const defaultMovies = [
 const Main = () => {
     const [movie, setMovie] = useState("");
     const [movies, setMovies] = useState(defaultMovies);
+    const [description, setDescription] = useState("");
+    const [director, setDirector] = useState("");
+    const [duration, setDuration] = useState(0);
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        console.log("submit:", form.movie.value, form.description.value);
+        console.log("submit:", movie, description);
         const newMovie = {
             id: nextMovieId(movies),
             title: movie,
-            director: form.director.value,
-            description: form.description.value,
-            duration: form.duration.value
+            director: director,
+            description: description,
+            duration: duration
         };
 
         setMovies([...movies, newMovie]);
@@ -66,6 +68,24 @@ const Main = () => {
         setMovie(movieInput.value);
     };
 
+    const handleDescriptionChange = (e: SyntheticEvent) => {
+        const descriptionInput = e.target as HTMLInputElement;
+        console.log("change in descriptionInput:", descriptionInput.value);
+        setDescription(descriptionInput.value);
+    }
+
+    const handleDirectorChange = (e: SyntheticEvent) => {
+        const directorInput = e.target as HTMLInputElement;
+        console.log("change in directorInput:", directorInput.value);
+        setDirector(directorInput.value);
+    }
+
+    const handleDurationChange = (e: SyntheticEvent) => {
+        const durationInput = e.target as HTMLInputElement;
+        console.log("change in durationInput:", durationInput.value);
+        setDuration(parseInt(durationInput.value));
+    }
+
     return (
         <div className="main">
             <h1>Movie List</h1>
@@ -77,15 +97,15 @@ const Main = () => {
                 </label>
                 <label>
                     Description:
-                    <input type="text" name="description" />
+                    <input type="text" name="description" onChange={handleDescriptionChange} />
                 </label>
                 <label>
                     Director:
-                    <input type="text" name="director" />
+                    <input type="text" name="director" onChange={handleDirectorChange} />
                 </label>
                 <label>
                     Duration:
-                    <input type="number" name="duration" />
+                    <input type="number" name="duration" onChange={handleDurationChange} />
                 </label>
                 <button type="submit">Add Movie</button>
             </form>
