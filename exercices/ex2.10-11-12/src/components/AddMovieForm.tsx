@@ -1,12 +1,14 @@
 import { SyntheticEvent, useState } from "react";
-import { Movie } from "../types";
+import { Movie, MovieContext } from "../types";
 import "./AddMovieForm.css";
+import { useOutletContext } from "react-router-dom";
 
 interface AddMovieFormProps {
   onMovieAdded: (movie: Movie) => void;
 }
 
 const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
+  const { movies }:MovieContext = useOutletContext();
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
   const [duration, setDuration] = useState(0);
@@ -16,7 +18,7 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    onMovieAdded({ title, director, duration, imageUrl, description, budget });
+    onMovieAdded({ id: nextMovieId(movies), title, director, duration, imageUrl, description, budget });
     setTitle("");
     setDirector("");
     setDuration(0);
@@ -80,5 +82,10 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
     </form>
   );
 };
+
+const nextMovieId = (movies : Movie[]) => {
+  const ids = movies.map((movie) => movie.id);
+  return Math.max(...ids) + 1;
+}
 
 export default AddMovieForm;

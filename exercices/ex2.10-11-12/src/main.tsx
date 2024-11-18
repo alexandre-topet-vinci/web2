@@ -25,6 +25,10 @@ const router = createBrowserRouter([
         path: "movie-list",
         element: <MovieListPage />,
       }
+      {
+        path: "movie-page",
+        element: <MoviePage />,
+      }
     ],
   }, 
   

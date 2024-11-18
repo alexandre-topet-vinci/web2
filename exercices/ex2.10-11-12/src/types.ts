@@ -1,4 +1,5 @@
 interface Movie {
+  id: number;
   title: string;
   director: string;
   duration: number;
@@ -8,6 +9,7 @@ interface Movie {
 }
 
 interface NewMovie {
+  id: number;
   title: string;
   director: string;
   duration: number;
