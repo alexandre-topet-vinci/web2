@@ -6,6 +6,7 @@ function App() {
   const [category, setCategory] = useState<{category : string} | null>();
 
   useEffect(() => {
+    const interval = setInterval(() => {
     fetch("https://v2.jokeapi.dev/joke/Any?type=single")
     .then((response) => {
       if (!response.ok)
@@ -21,6 +22,8 @@ function App() {
       .catch((err) => {
         console.error("HomePage::error ", err);
       })
+    }, 10000);
+    return () => clearInterval(interval);
     }, []);
 
   return (
